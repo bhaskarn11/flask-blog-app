@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+{% block title %}
+    Contact - Bhaskar.in
+{% endblock %}
+
+{%block content %}
+<div class="container my-4">
+    {% with alerts = get_flashed_messages(with_categories=True) %}
+        {% if alerts %}
+            {% for type, alert in alerts %}
+            <div class="alert alert-{{ type }} d-flex align-items-center alert-dismissible fade show" role="alert">
+                <i style="font-size: 24px;" class="bi {{ "bi-check-circle-fill" if type == 'success' else "bi-exclamation-circle-fill" }} me-2"></i>
+                <div>{{alert}}</div>
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+              </div>
+            {% endfor %}    
+        {%endif%}
+    {% endwith %}
+    <h3>Contact Me</h3>
+    <form class="needs-validation" novalidate method="POST" action="contact">
+        <div class="row">
+            <div class="col-md-6 mb-3">
+                <label for="name" class="form-label">Name</label>
+                <input type="text" class="form-control" name="name" id="name" placeholder="e.g - Rajesh Kuthrappali" required>
+                <div class="invalid-feedback">
+                    Please write your name.
+                </div>
+            </div>
+        </div>
+        
+        <div class="row">
+            <div class="col-md-6 mb-3">
+                <label for="email" class="form-label">Email</label>
+                <input type="email" class="form-control" name="email" id="email" required placeholder="e.g - rajesh.k@email.com">
+                <div class="invalid-feedback">
+                    Please write your email so I can contact you.
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6 mb-3">
+                <label for="message">Massage</label>
+                <textarea class="form-control" name="message" id="message" rows="4" required placeholder="Type your message..."></textarea>
+                <div class="invalid-feedback">
+                    Please provide a massage.
+                </div>
+            </div>
+        </div>
+        <button type="submit" class="btn btn-lg btn-primary"><i class="bi bi-lightning-charge-fill pe-2"></i>Send</button>
+    </form>
+    
+    </div>
+{% endblock %}

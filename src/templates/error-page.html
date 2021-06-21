@@ -1,0 +1,33 @@
+{%extends 'base.html'%}
+{%block title%}
+    Oops! page not found
+{%endblock%}
+
+{%block header%}
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container-fluid d-flex justify-content-center">
+        <a class="navbar-brand" href="/">
+            <img src="{{url_for("static", filename="mandala128px.png")}}" width="40px" height="40px" alt="brand-logo">
+            Bhaskar.in
+        </a>       
+    </div>
+</nav>
+{%endblock%}
+
+{%block content%}
+    <div class="container" >
+        <div class="row">
+            <div class="col-12 text-center my-5">
+                <img style="max-width: 100%; width: fit-content;" src="{{url_for("static", filename="error-page.png")}}" alt="error-page">
+                <p>
+                    <h2>Page Not found</h2>
+                    <h4>The requested URL was not found on the server. If you entered <br> 
+                    the URL manually please check your spelling and try again.</h4>
+                </p>
+                    <a type="button" href="/" class="btn btn-primary">Return to Home Page</a>
+            </div>
+        </div>
+        
+        
+    </div>
+{%endblock%}

@@ -1,0 +1,37 @@
+{% block footer %}
+
+    <div class="container pt-3">
+      <div class="row">
+      <div class="col-md-6 mx-auto mb-3">
+        <div class="d-inline-flex flex-row align-item-center">
+          <img src="{{url_for("static", filename="mandala32px.png")}}" width="28px" height="28px" alt="footer-logo">
+          <span class="ps-2"><h4>Bhaskar Nar</h4></span>
+        </div>
+        
+        <ul class="list-unstyled">
+          <li><p class="text-secondary">
+            <i class="bi bi-exclamation-circle text-info"></i>
+            looking for freelancing work. <br>
+            web developer, python, flask, react
+          </P></li>
+          <li>
+            <a class="text-decoration-none link-secondary" target="_blank" 
+                href="mailto:developer.bhaskarn@gmail.com">
+              <i class="bi bi-envelope-fill mr-1"></i><span class="ml-1"> developer.bhaskarn@gmail.com</span></a></li>
+        </ul>
+      </div>
+        <div class="col">
+          <h5>Social Links</h5>
+          <ul class="list-unstyled ">
+            <li><a class="text-decoration-none" target="_blank" href="https://twitter.com/BhaskarNar"><i class="bi bi-twitter pe-2"></i>Twitter</a></li>
+            <li><a class="text-decoration-none" target="_blank" href="https://www.instagram.com/bhaskarathome"><i class="bi bi-instagram"></i><span class="ps-2">Instagram</span></a></li>
+            <li><a class="text-decoration-none" target="_blank" href="https://www.facebook.com/bhaskar.nar.11"><i class="bi bi-facebook"></i><span class="ps-2">Facebook</span></a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="row py-2">
+          <span class="text-center"> &copy 2021 Bhaskar Nar, all rights reserved. </span>
+      </div>
+    </div>
+  
+  {% endblock %}
