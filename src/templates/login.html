@@ -1,0 +1,71 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    Admin - Login
+{% endblock %}
+
+{%block header%}
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container-fluid d-flex justify-content-center">
+        <a class="navbar-brand" href="/">
+            <img src="{{url_for("static", filename="mandala128px.png")}}" width="40px" height="40px" alt="brand-logo">
+            Bhaskar.in
+        </a>       
+    </div>
+</nav>
+{%endblock%}
+
+{% block content %}
+    <div class="container my-3">
+        <form novalidate method="POST" action="">
+            <div class="card">
+                <div class="card-body">
+                    <fieldset>
+                        <legend>Login</legend>
+                        {{ form.csrf_token() }}
+                        <div class="row">
+                            <div class="col">
+                                <div class="col-md-6 mb-3">
+                                    {{ form.email.label(class = "form-label") }}
+                                    {% if form.email.errors %}
+                                        {{ form.email(class="form-control is-invalid", placeholder="e.g - rajesh.k@email.com") }}
+                                        <div class="invalid-feedback">
+                                            {% for error in form.email.errors %}
+                                                <span>{{ error }}</span>
+                                            {% endfor %}
+                                        </div>
+                                    {% else %}                    
+                                        {{ form.email(class="form-control", placeholder="e.g - rajesh.k@email.com") }}
+                                    {% endif %}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col">
+                                <div class="col-md-6 mb-3">
+                                    {{ form.password.label(class = "form-label") }}
+                                    {% if form.password.errors %}
+                                        {{ form.password(class="form-control is-invalid", placeholder="e.g - rajesh.k@email.com") }}
+                                        <div class="invalid-feedback">
+                                            {% for error in form.email.errors %}
+                                                <span>{{ error }}</span>
+                                            {% endfor %}
+                                        </div>
+                                    {% else %}                    
+                                        {{ form.password(class="form-control", placeholder="enter your password") }}
+                                    {% endif %}
+                                </div>
+                            </div>
+                        </div>
+                    </fieldset>
+                        <div class="row">
+                            <div class="col-md-6">
+                                {{ form.submit(class="btn btn-primary btn-lg") }}
+                            </div>
+                        </div>
+                </div>
+            </div>
+        </form>
+    </div>
+
+{%endblock%}

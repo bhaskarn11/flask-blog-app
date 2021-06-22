@@ -1,23 +1,25 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, SubmitField
-from wtforms.validators import DataRequired, Length
+from wtforms import StringField, SubmitField, BooleanField, TextAreaField, PasswordField
+from wtforms.validators import DataRequired, Length, Email, InputRequired, EqualTo
 
 
 class ContactForm(FlaskForm):
-    name = StringField(label="name")
-    email = StringField(label="email")
-    message = StringField(label="message")
-    submit = SubmitField("submit")
+    name = StringField("Name", validators=[DataRequired(), InputRequired()])
+    email = StringField("Email", validators=[DataRequired() ,Email(), InputRequired(message="Please provide email")])
+    message = TextAreaField("Message", validators=[ DataRequired(), Length(1, 900), InputRequired()])
+    submit = SubmitField("Send")
 
 
 class LoginForm(FlaskForm):
-    email = StringField(label="email", validators=[DataRequired()])
-    password = StringField(label="password", validators=[DataRequired()])
-    submit = SubmitField(label="login")
+    email = StringField("Email", validators=[DataRequired(), Email(), InputRequired()])
+    password = PasswordField("Password", validators=[DataRequired(), InputRequired()])
+    rememberPassword = BooleanField("Remember Password", default=True)
+    submit = SubmitField("Login")
+
 
 class SignupForm(FlaskForm):
-    name = StringField(label="name", validators=[DataRequired()])
-    email = StringField(label="email", validators=[DataRequired()])
-    password = StringField(label="password", validators=[DataRequired()])
-    cnf_password = StringField(label="Confirm password", validators=[DataRequired()])
-    submit = SubmitField(label="Signup", validators=[DataRequired()])
+    name = StringField("Name", validators=[DataRequired(), InputRequired()])
+    email = StringField("Email", validators=[DataRequired(), Email(), InputRequired()])
+    password = PasswordField("Password", validators=[DataRequired(), Length(6,24), InputRequired()])
+    cnf_password = PasswordField("Confirm password", validators=[DataRequired(), Length(6,24), InputRequired(), EqualTo('password', "password didn't match")])
+    submit = SubmitField("Signup")

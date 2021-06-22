@@ -1,0 +1,116 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    Admin - Registration
+{% endblock %}
+
+{%block header%}
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container-fluid d-flex justify-content-center">
+        <a class="navbar-brand" href="/">
+            <img src="{{url_for("static", filename="mandala128px.png")}}" width="40px" height="40px" alt="brand-logo">
+            Bhaskar.in
+        </a>       
+    </div>
+</nav>
+{%endblock%}
+
+{% block content %}
+    <div class="container my-3">
+        {% with alerts = get_flashed_messages(with_categories=True) %}
+            {% if alerts %}
+                {% for type, alert in alerts %}
+                <div class="alert alert-{{ type }} d-flex align-items-center alert-dismissible fade show" role="alert">
+                    <i style="font-size: 24px;" class="bi {{ "bi-check-circle-fill" if type == 'success' else "bi-exclamation-circle-fill" }} me-2"></i>
+                    <div>{{alert}}</div>
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+                {% endfor %}    
+            {%endif%}
+        {% endwith %}
+        <div class="card">
+            <form novalidate method="POST" action="">
+                <div class="card-body">
+                    <fieldset>
+                        <legend>Admin Registration</legend>
+                        {{ form.csrf_token() }}
+                        <div class="row">
+                            <div class="col">
+                                <div class="col-md-6 mb-3">
+                                    {{ form.name.label(class = "form-label") }}
+                                    {% if form.name.errors %}
+                                        {{ form.name(class="form-control is-invalid", placeholder="e.g - Rajesh Kuthrapalli") }}
+                                        <div class="invalid-feedback">
+                                            {% for error in form.name.errors %}
+                                                <span>{{ error }}</span>
+                                            {% endfor %}
+                                        </div>
+                                    {% else %}                    
+                                        {{ form.name(class="form-control", placeholder="e.g - Rajesh Kuthrapalli") }}
+                                    {% endif %}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col">
+                                <div class="col-md-6 mb-3">
+                                    {{ form.email.label(class = "form-label") }}
+                                    {% if form.email.errors %}
+                                        {{ form.email(class="form-control is-invalid", placeholder="e.g - rajesh.k@email.com") }}
+                                        <div class="invalid-feedback">
+                                            {% for error in form.email.errors %}
+                                                <span>{{ error }}</span>
+                                            {% endfor %}
+                                        </div>
+                                    {% else %}                    
+                                        {{ form.email(class="form-control", placeholder="e.g - rajesh.k@email.com") }}
+                                    {% endif %}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col">
+                                <div class="col-md-6 mb-3">
+                                    {{ form.password.label(class = "form-label") }}
+                                    {% if form.password.errors %}
+                                        {{ form.password(class="form-control is-invalid", placeholder="e.g - rajesh.k@email.com") }}
+                                        <div class="invalid-feedback">
+                                            {% for error in form.email.errors %}
+                                                <span>{{ error }}</span>
+                                            {% endfor %}
+                                        </div>
+                                    {% else %}                    
+                                        {{ form.password(class="form-control", placeholder="enter your password") }}
+                                    {% endif %}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col">
+                                <div class="col-md-6 mb-3">
+                                    {{ form.cnf_password.label(class = "form-label") }}
+                                    {% if form.cnf_password.errors %}
+                                        {{ form.cnf_password(class="form-control is-invalid", placeholder="Confirm password") }}
+                                        <div class="invalid-feedback">
+                                            {% for error in form.cnf_password.errors %}
+                                                <span>{{ error }}</span>
+                                            {% endfor %}
+                                        </div>
+                                    {% else %}                    
+                                        {{ form.cnf_password(class="form-control", placeholder="Confirm password") }}
+                                    {% endif %}
+                                </div>
+                            </div>
+                        </div>
+                    </fieldset>
+                    <div class="row">
+                        <div class="col-md-6">
+                            {{ form.submit(class="btn btn-primary btn-lg") }}
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+
+{%endblock%}

@@ -11,3 +11,16 @@ class Message(db.Model):
 
     def __repr__(self):
         return f"ID:{self.id}, name: {self.name}, {self.email}, message: {self.message}, sent_date: {self.sent_date}"
+
+
+class AdminUser(db.Model):
+    id = db.Column(db.Integer, primary_key=True, nullable=False)
+    name = db.Column(db.String(length=30), nullable=False)
+    email = db.Column(db.String(length=64), nullable=False, unique=True)
+    password = db.Column(db.String(length=60), nullable=False)
+    last_login = db.Column(db.DateTime, nullable = False)
+
+
+    def __repr__(self):
+        return f"ID: {self.id}, name: {self.name}, email: {self.email}, password: {self.password}"
+

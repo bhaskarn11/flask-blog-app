@@ -17,36 +17,56 @@
         {%endif%}
     {% endwith %}
     <h3>Contact Me</h3>
-    <form class="needs-validation" novalidate method="POST" action="contact">
+    <form novalidate method="POST" action="">
+        {{ form.csrf_token() }}
         <div class="row">
-            <div class="col-md-6 mb-3">
-                <label for="name" class="form-label">Name</label>
-                <input type="text" class="form-control" name="name" id="name" placeholder="e.g - Rajesh Kuthrappali" required>
-                <div class="invalid-feedback">
-                    Please write your name.
-                </div>
+            <div class="col-md-6 mb-3 ">
+                {{ form.name.label(class="form-label") }}
+                {% if form.name.errors %}
+                    {{ form.name(class="form-control is-invalid", placeholder="e.g - Rajesh Kuthrappali") }}
+
+                    <div class="invalid-feedback">
+                        {% for error in form.name.errors %}
+                            <span>{{ error }}</span>
+                        {% endfor %}
+                    </div>
+                {% else %}
+                    {{ form.name(class="form-control", placeholder="e.g - Rajesh Kuthrappali") }}              
+                {% endif %}
             </div>
         </div>
         
         <div class="row">
-            <div class="col-md-6 mb-3">
-                <label for="email" class="form-label">Email</label>
-                <input type="email" class="form-control" name="email" id="email" required placeholder="e.g - rajesh.k@email.com">
-                <div class="invalid-feedback">
-                    Please write your email so I can contact you.
-                </div>
+            <div class="col-md-6 mb-3 has-validation">
+                {{ form.email.label(class = "form-label") }}
+                {% if form.email.errors %}
+                    {{ form.email(class="form-control is-invalid", placeholder="e.g - rajesh.k@email.com") }}
+                    <div class="invalid-feedback">
+                        {% for error in form.email.errors %}
+                            <span>{{ error }}</span>
+                        {% endfor %}
+                    </div>
+                {% else %}                    
+                    {{ form.email(class="form-control", placeholder="e.g - rajesh.k@email.com") }}
+                {% endif %}
             </div>
         </div>
         <div class="row">
-            <div class="col-md-6 mb-3">
-                <label for="message">Massage</label>
-                <textarea class="form-control" name="message" id="message" rows="4" required placeholder="Type your message..."></textarea>
-                <div class="invalid-feedback">
-                    Please provide a massage.
-                </div>
+            <div class="col-md-6 mb-3 ">
+                {{ form.message.label(class="form-label") }}
+                {% if form.message.errors %}
+                    {{ form.message(class="form-control is-invalid", placeholder="Type your message...") }}
+                    <div class="invalid-feedback">
+                        {% for error in form.message.errors %}
+                            <span>{{ error }}</span>
+                        {% endfor %}
+                    </div>
+                {% else %}
+                    {{ form.message(class="form-control", placeholder="Type your message...") }}
+                {% endif %}
             </div>
         </div>
-        <button type="submit" class="btn btn-lg btn-primary"><i class="bi bi-lightning-charge-fill pe-2"></i>Send</button>
+        {{ form.submit(class="btn btn-lg btn-primary") }}
     </form>
     
     </div>
