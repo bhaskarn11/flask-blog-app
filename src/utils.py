@@ -7,3 +7,4 @@ def utc2local(utc_dt: datetime):
     local_time = utc_time.astimezone(tz_local)
     
     return local_time
+

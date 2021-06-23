@@ -17,6 +17,17 @@
 
 {% block content %}
     <div class="container my-3">
+        {% with alerts = get_flashed_messages(with_categories=True) %}
+                {% if alerts %}
+                    {% for type, alert in alerts %}
+                    <div class="alert alert-{{ type }} d-flex align-items-center alert-dismissible fade show" role="alert">
+                        <i style="font-size: 24px;" class="bi {{ "bi-check-circle-fill" if type == 'success' else "bi-exclamation-circle-fill" }} me-2"></i>
+                        <div>{{alert}}</div>
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                    {% endfor %}    
+                {%endif%}
+            {% endwith %}
         <form novalidate method="POST" action="">
             <div class="card">
                 <div class="card-body">
@@ -57,11 +68,16 @@
                                 </div>
                             </div>
                         </div>
+                        <div class="form-check mb-3">
+                            {{ form.rememberPassword(class="form-check-input") }}
+                            {{ form.rememberPassword.label(class="form-check-label") }}
+                        </div>
                     </fieldset>
                         <div class="row">
                             <div class="col-md-6">
                                 {{ form.submit(class="btn btn-primary btn-lg") }}
                             </div>
+                            <small> Don't have an account? <a href="{{ url_for(".user_register") }}"> Signup </a></small>
                         </div>
                 </div>
             </div>

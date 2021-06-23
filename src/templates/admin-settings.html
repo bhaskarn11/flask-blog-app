@@ -1,0 +1,90 @@
+{% extends 'admin-dashboard.html' %}
+
+{% block title %}
+    Admin - Settings
+{% endblock %}
+
+{% block content %}
+    <div class="container my-3">
+        <!-- <h2>settings page</h2> -->
+        <div class="card">
+            <div class="card-header"><h3>Admin Settings</h3></div>
+            <div class="card-body">
+            <form novalidate method="POST" action="">
+                    <div class="card-body">
+                        <fieldset>
+                            {{ form.csrf_token() }}
+                            <div class="row">
+                                <div class="col-md-3 mb-3">
+                                    {{ form.name.label(class = "form-label") }}
+                                    {% if form.name.errors %}
+                                        {{ form.name(class="form-control is-invalid", placeholder="e.g - Rajesh Kuthrapalli") }}
+                                        <div class="invalid-feedback">
+                                            {% for error in form.name.errors %}
+                                                <span>{{ error }}</span>
+                                            {% endfor %}
+                                        </div>
+                                    {% else %}                    
+                                        {{ form.name(class="form-control", placeholder="e.g - Rajesh Kuthrapalli") }}
+                                    {% endif %}
+                                </div>
+                                <div class="col-md-3 mb-3">
+                                    {{ form.email.label(class = "form-label") }}
+                                    {% if form.email.errors %}
+                                        {{ form.email(class="form-control is-invalid", placeholder="e.g - rajesh.k@email.com") }}
+                                        <div class="invalid-feedback">
+                                            {% for error in form.email.errors %}
+                                                <span>{{ error }}</span>
+                                            {% endfor %}
+                                        </div>
+                                    {% else %}                    
+                                        {{ form.email(class="form-control", placeholder="e.g - rajesh.k@email.com") }}
+                                    {% endif %}
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col">
+                                    <div class="col-md-6 mb-3">
+                                        {{ form.password.label(class = "form-label") }}
+                                        {% if form.password.errors %}
+                                            {{ form.password(class="form-control is-invalid", placeholder="e.g - rajesh.k@email.com") }}
+                                            <div class="invalid-feedback">
+                                                {% for error in form.email.errors %}
+                                                    <span>{{ error }}</span>
+                                                {% endfor %}
+                                            </div>
+                                        {% else %}                    
+                                            {{ form.password(class="form-control", placeholder="enter your password") }}
+                                        {% endif %}
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col">
+                                    <div class="col-md-6 mb-3">
+                                        {{ form.cnf_password.label(class = "form-label") }}
+                                        {% if form.cnf_password.errors %}
+                                            {{ form.cnf_password(class="form-control is-invalid", placeholder="Confirm password") }}
+                                            <div class="invalid-feedback">
+                                                {% for error in form.cnf_password.errors %}
+                                                    <span>{{ error }}</span>
+                                                {% endfor %}
+                                            </div>
+                                        {% else %}                    
+                                            {{ form.cnf_password(class="form-control", placeholder="Confirm password") }}
+                                        {% endif %}
+                                    </div>
+                                </div>
+                            </div>
+                        </fieldset>
+                        <div class="row">
+                            <div class="col-md-6">
+                                {{ form.submit(class="btn btn-primary btn-lg") }}
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+{% endblock %}
