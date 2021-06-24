@@ -1,4 +1,4 @@
-from datetime import datetime
+from datetime import datetime, timezone
 from functools import wraps
 from flask import Blueprint, request, render_template, redirect, url_for, flash, session, g
 from src.forms import LoginForm, SignupForm, AccountUpdateForm
@@ -38,7 +38,7 @@ def user_login():
                 return redirect(".user_login")
         except:
             user = None
-            flash("Oops! something went.", 'warning')
+            flash("Oops! something went wrong.", 'warning')
             return redirect(".user_login")
 
     return render_template("login.html", form=form)
@@ -47,7 +47,7 @@ def user_login():
 @auth.route("/logout", methods=['GET'])
 def user_logout():
     session.pop('user_id', None)
-    flash("Looged out successfully!", 'info')
+    flash("Logged out successfully!", 'info')
     return redirect(url_for(".user_login"))
 
 
@@ -57,7 +57,7 @@ def user_register():
     if form.validate_on_submit():
         hashPassword = generate_password_hash(form.password.data)
         user = AdminUser(name=form.name.data, email=form.email.data,
-                         password=hashPassword, last_login=datetime.utcnow())
+                         password=hashPassword, last_login=datetime.now(tz=timezone.utc))
         try:
             db.session.add(user)
             db.session.commit()
